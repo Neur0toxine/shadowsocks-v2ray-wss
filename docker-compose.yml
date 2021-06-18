@@ -1,0 +1,23 @@
+version: "3"
+services:
+  shadowsocks:
+    build:
+      context: .
+    environment:
+      PASSWORD: "${PASSWORD}"
+      ENCRYPT: "${ENCRYPT}"
+      V2_PATH: "${V2_PATH}"
+      QR_PATH: "${QR_PATH}"
+      GENERATE_QR: "${GENERATE_QR}"
+      DOMAIN: "${DOMAIN}"
+      PORT: ${PORT}
+      TLS_CERT: "${TLS_CERT}"
+      TLS_KEY: "${TLS_KEY}"
+      TLS_DHPARAM: "${TLS_DHPARAM}"
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - ./cert.pem:${TLS_CERT}
+      - ./cert.key:${TLS_KEY}
+      - ./dhparams.pem:${TLS_DHPARAM}
+    restart: always
